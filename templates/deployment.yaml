@@ -29,7 +29,7 @@ spec:
             - /usr/local/bin/ao-logs
             - /tmp/ansible-operator/runner
             - stdout
-          image: "{{ .Values.operator.image.repository }}:{{ .Values.operator.image.tag }}"
+          image: "{{ .Values.operator.image.repository }}@{{ .Values.operator.image.tag }}"
           imagePullPolicy: {{ .Values.operator.image.pullPolicy }}
           volumeMounts:
             - mountPath: /tmp/ansible-operator/runner
@@ -40,7 +40,7 @@ spec:
           resources:
             {{- toYaml .Values.operator.resources | nindent 12 }}
         - name: operator
-          image: "{{ .Values.operator.image.repository }}:{{ .Values.operator.image.tag }}"
+          image: "{{ .Values.operator.image.repository }}@{{ .Values.operator.image.tag }}"
           imagePullPolicy: {{ .Values.operator.image.pullPolicy }}
           volumeMounts:
             - mountPath: /tmp/ansible-operator/runner

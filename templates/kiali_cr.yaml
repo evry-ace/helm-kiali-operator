@@ -2,7 +2,7 @@
 apiVersion: {{ .Values.kiali.apiVersion }}
 kind: {{ .Values.kiali.kind }}
 metadata:
-  name: {{ .Values.kiali.name }}
+  name: {{ .Values.kiali.metadata.name }}
   lables:
     {{- include "kiali-operator.labels" . | nindent 4 }}
   {{- with .Values.kiali.metadata.annotations }}

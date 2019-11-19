@@ -69,7 +69,7 @@ rules:
   - watch
 - apiGroups: ["rbac.authorization.k8s.io"]
   resources:
-  {{- if .Values.clusterWide }}
+  {{- if .Values.operator.clusterWide }}
   - clusterrolebindings
   - clusterroles
   {{- end }}

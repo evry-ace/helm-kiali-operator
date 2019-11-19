@@ -7,7 +7,7 @@ operator:
 
   image:
     repository: quay.io/kiali/kiali-operator
-    tag: sha256:c78dd0c9868e4e9e952984305def2b39df9e5ac3fee1da48919325cd6155445f # v1.9.1
+    tag: sha256:75483156b8ee7fa75e8f6385397466523dbeb6070ae028963c901d5db14b671d # v1.7.0
     pullPolicy: IfNotPresent
 
   imagePullSecrets: []
@@ -57,11 +57,13 @@ operator:
   affinity: {}
 
 kiali:
-  enabled: false
+  enabled: true
   apiVersion: kiali.io/v1alpha1
   kind: Kiali
   metadata:
     name: kiali
     lables: {}
     annotations: {}
-  spec: {}
+  spec:
+    ingress_enabled: true
+    service_type: NodePort

@@ -1,0 +1,14 @@
+{{- if .Values.kiali.enabled }}
+apiVersion: {{ .Values.kiali.apiVersion }}
+kind: {{ .Values.kiali.kind }}
+metadata:
+  name: {{ .Values.kiali.name }}
+  lables:
+    {{- include "kiali-operator.labels" . | nindent 4 }}
+  {{- with .Values.kiali.metadata.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 -}}
+  {{- end }}
+spec:
+  {{- toYaml .Values.kiali.spec | nindent 2 }}
+{{- end }}

@@ -31,6 +31,25 @@ rules:
   - get
   - list
   - patch
+- apiGroups: [""]
+  resources:
+  - secrets
+  verbs:
+  - create
+  - list
+  - watch
+- apiGroups: [""]
+  resourceNames:
+  - kiali-signing-key
+  resources:
+  - secrets
+  verbs:
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
 - apiGroups: ["apps"]
   resources:
   - deployments
@@ -123,6 +142,30 @@ rules:
   - patch
   - update
   - watch
+- apiGroups: ["config.openshift.io"]
+  resources:
+  - clusteroperators
+  verbs:
+  - list
+  - watch
+- apiGroups: ["config.openshift.io"]
+  resourceNames:
+  - kube-apiserver
+  resources:
+  - clusteroperators
+  verbs:
+  - get
+- apiGroups: ["console.openshift.io"]
+  resources:
+  - consolelinks
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
 - apiGroups: ["monitoring.kiali.io"]
   resources:
   - monitoringdashboards
@@ -173,84 +216,13 @@ rules:
   - get
   - list
   - watch
-- apiGroups: ["config.istio.io"]
-  resources:
-  - adapters
-  - apikeys
-  - bypasses
-  - authorizations
-  - checknothings
-  - circonuses
-  - cloudwatches
-  - deniers
-  - dogstatsds
-  - edges
-  - fluentds
-  - handlers
-  - instances
-  - kubernetesenvs
-  - kuberneteses
-  - listcheckers
-  - listentries
-  - logentries
-  - memquotas
-  - metrics
-  - noops
-  - opas
-  - prometheuses
-  - quotas
-  - quotaspecbindings
-  - quotaspecs
-  - rbacs
-  - redisquotas
-  - reportnothings
-  - rules
-  - signalfxs
-  - solarwindses
-  - stackdrivers
-  - statsds
-  - stdios
-  - templates
-  - tracespans
-  - zipkins
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - watch
-- apiGroups: ["networking.istio.io"]
-  resources:
-  - destinationrules
-  - gateways
-  - serviceentries
-  - sidecars
-  - virtualservices
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - watch
-- apiGroups: ["authentication.istio.io"]
-  resources:
-  - meshpolicies
-  - policies
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - watch
-- apiGroups: ["rbac.istio.io"]
-  resources:
-  - clusterrbacconfigs
-  - rbacconfigs
-  - servicerolebindings
-  - serviceroles
+- apiGroups:
+  - config.istio.io
+  - networking.istio.io
+  - authentication.istio.io
+  - rbac.istio.io
+  - security.istio.io
+  resources: ["*"]
   verbs:
   - create
   - delete
@@ -301,3 +273,13 @@ rules:
   verbs:
   - get
   - list
+- apiGroups: ["iter8.tools"]
+  resources:
+  - experiments
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - watch

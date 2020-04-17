@@ -7,7 +7,7 @@ operator:
 
   image:
     repository: quay.io/kiali/kiali-operator
-    tag: sha256:941e1e2b31a86bf0d41d8964e6f0559267859fe3893b518b0dbd605c60c1ffe7 # v1.16.0
+    tag: sha256:3364a9c62a6766f36da7b7a36921f42e52e00a2b43e1aacd38540113552dce6e # v1.16.0
     pullPolicy: IfNotPresent
 
   imagePullSecrets: []

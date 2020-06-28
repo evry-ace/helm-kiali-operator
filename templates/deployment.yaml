@@ -24,24 +24,11 @@ spec:
       securityContext:
         {{- toYaml .Values.operator.podSecurityContext | nindent 8 }}
       containers:
-        - name: ansible
-          command:
-            - /usr/local/bin/ao-logs
-            - /tmp/ansible-operator/runner
-            - stdout
-          image: "{{ .Values.operator.image.repository }}@{{ .Values.operator.image.tag }}"
-          imagePullPolicy: {{ .Values.operator.image.pullPolicy }}
-          volumeMounts:
-            - mountPath: /tmp/ansible-operator/runner
-              name: runner
-              readOnly: true
-          #livenessProbe: {}
-          #readinessProbe: {}
-          resources:
-            {{- toYaml .Values.operator.resources | nindent 12 }}
         - name: operator
           image: "{{ .Values.operator.image.repository }}@{{ .Values.operator.image.tag }}"
           imagePullPolicy: {{ .Values.operator.image.pullPolicy }}
+          args:
+            - "--zap-level=info"
           volumeMounts:
             - mountPath: /tmp/ansible-operator/runner
               name: runner
@@ -62,6 +49,15 @@ spec:
                   fieldPath: metadata.namespace
             - name: OPERATOR_NAME
               value: "kiali-operator"
+            - name: ANSIBLE_DEBUG_LOGS
+              value: "True"
+            - name: ANSIBLE_VERBOSITY_KIALI_KIALI_IO
+              value: "1"
+          ports:
+            - name: http-metrics
+              containerPort: 8383
+            - name: cr-metrics
+              containerPort: 8686
           #livenessProbe: {}
           #readinessProbe: {}
           resources:
